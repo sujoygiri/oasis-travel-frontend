@@ -1,0 +1,7 @@
+<div class="card">
+    <p-carousel [value]="products" [showIndicators]="false">
+        <ng-template let-product pTemplate="item">
+            <img src="{{product.imageSrc}}" alt="Image" width="250" class="carousal-image"/>
+        </ng-template>
+    </p-carousel>
+</div>
