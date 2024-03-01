@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { CarouselModule } from 'primeng/carousel';
-import { ImageModule } from 'primeng/image';
 
 @Component({
   selector: 'app-landing-carousel',
   standalone: true,
-  imports: [
-    CarouselModule,
-    ImageModule
-  ],
+  imports: [],
   templateUrl: './landing-carousel.component.html',
   styleUrl: './landing-carousel.component.css'
 })
