@@ -1,0 +1,12 @@
+@media screen and (max-width: 768px) and (min-width: 356px){
+    .search_btn_text,.search_btn_icon{
+        font-size: large !important;
+    }
+}
+
+@media screen and (max-width: 356px){
+    .search_btn_text,.search_btn_icon{
+        font-size: small !important;
+    }
+    
+}
