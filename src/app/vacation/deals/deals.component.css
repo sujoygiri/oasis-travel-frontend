@@ -1,0 +1,11 @@
+@media screen and (max-width: 992px){
+    .deal_card > img{
+        height: 234px;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .deal_card > img{
+        height: 274px;
+    }
+}
