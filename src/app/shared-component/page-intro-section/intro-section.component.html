@@ -2,13 +2,13 @@
     <div class="row align-items-start">
         <div class="col-sm-12 col-xl-8">
             <div class="intro_image">
-                <img [src]="'assets/'+introImage" alt="" srcset="" width="">
+                <img class="w-100" [src]="'assets/'+introImage" [alt]="introTitle" srcset="">
             </div>
         </div>
         <div class="col-sm-12 col-xl-4">
             <div class="paragraph_text_container">
-                <h3 class="my-3">{{introTitle}}</h3>
-                <div class="paragraph_text pt-2">
+                <h3 class="my-2">{{introTitle}}</h3>
+                <div class="paragraph_text pt-1">
                     <p class="text-start font-monospace">{{introText}}</p>
                 </div>
             </div>

@@ -1,9 +1,5 @@
-.intro_image{
+.intro_image  img{
     width: 100%;
-    height: auto;
-}
-
-.intro_image > img{
-    width: inherit;
-    height: inherit;
+    height: 100%;
+    object-fit: cover;
 }
