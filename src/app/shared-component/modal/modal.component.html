@@ -1,17 +1,35 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="main_modal" tabindex="-1" aria-labelledby="main_modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin:auto 0;">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin:0;"></button>
+                <h1 class="modal-title fs-5" style="margin:0 auto;">{{modalTitle}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    style="margin:0;"></button>
             </div>
             <div class="modal-body">
-                ...
+                <div *ngIf="showSignUpForm">
+                    <app-sign-up></app-sign-up>
+                </div>
+                <div *ngIf="showSignInForm">
+                    <app-sign-in></app-sign-in>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer d-flex justify-content-center">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button> -->
+                <div *ngIf="showSignUpForm">
+                    <p>Already have an account? <button class="btn btn-small btn-outline-secondary ms-2 my-1" (click)="changeToSignIn()">Sign in</button></p>
+                </div>
+                <div *ngIf="showSignInForm">
+                    <p>Don't have an account? <button class="btn btn-small btn-outline-secondary ms-2 my-1" (click)="changeToSignUp()">Sign up</button></p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- <div style="height: 100px; width: 100px; background-color: yellow;">
+    <div style="height: 100px; width: 100px; background-color: orange; position: relative; top: 1rem; left: 2rem;">
+        <input type="text" style="height: auto;">
+    </div>
+</div> -->
