@@ -1,21 +1,21 @@
 <div class="container">
-    <form>
+    <form [formGroup]="signUpForm" (ngSubmit)="handelSignUp()">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="email" class="form-control" id="username">
+            <input type="email" class="form-control" id="username" formControlName="username">
         </div>
         <div class="mb-3">
             <label for="sign_up_email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="sign_up_email" >
+            <input type="email" class="form-control" id="sign_up_email" formControlName="email">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" formControlName="password">
         </div>
         <div class="mb-3">
             <label for="retype_password" class="form-label">Retype password</label>
-            <input type="password" class="form-control" id="retype_password">
+            <input type="password" class="form-control" id="retype_password" formControlName="retype_password">
         </div>
         <div class="d-flex justify-content-center my-3">
             <button type="submit" class="btn btn-primary w-50">Submit</button>

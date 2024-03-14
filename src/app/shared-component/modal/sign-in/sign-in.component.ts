@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class SignInComponent implements OnInit {
   signInForm: FormGroup = new FormGroup({});
-  constructor(public formBuilder: FormBuilder, private globalService: GlobalService) { }
+  constructor(private formBuilder: FormBuilder, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
