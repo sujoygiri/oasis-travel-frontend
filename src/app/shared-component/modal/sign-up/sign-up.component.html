@@ -2,7 +2,7 @@
     <form [formGroup]="signUpForm" (ngSubmit)="handelSignUp()">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="email" class="form-control" id="username" formControlName="username">
+            <input type="text" class="form-control" id="username" formControlName="username">
             <div *ngIf="signUpForm.controls['username'].touched && signUpForm.controls['username'].dirty">
                 <span class="text-danger" *ngIf="signUpForm.controls?.['username']?.errors?.['required']">Username is
                     required</span>
