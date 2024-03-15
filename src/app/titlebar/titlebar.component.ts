@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import { GlobalService, ModalStatusType } from '../global.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-titlebar',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   // providers:[GlobalService],
   templateUrl: './titlebar.component.html',

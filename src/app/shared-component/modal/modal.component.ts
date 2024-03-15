@@ -35,7 +35,6 @@ export class ModalComponent implements AfterViewInit {
     } else {
       this.changeToSignUp()
     }
-    console.log(this.globalService.modalStatusObj);
   }
 
   changeToSignIn() {

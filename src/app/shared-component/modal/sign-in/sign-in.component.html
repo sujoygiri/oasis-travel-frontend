@@ -1,15 +1,28 @@
 <div class="container">
-    <form [formGroup]="signInForm" (ngSubmit)="handelFormSubmit()">
+    <form [formGroup]="signInForm" (ngSubmit)="handelSignIn()">
         <div class="mb-3">
             <label for="sign_in_email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="sign_in_email" formControlName="email">
+            <div *ngIf="signInForm.controls['email'].touched && signInForm.controls['email'].dirty">
+                <span class="text-danger" *ngIf="signInForm.controls?.['email']?.errors?.['required']">Email is
+                    required</span>
+                <span class="text-danger" *ngIf="signInForm.controls?.['email']?.errors?.['email']">Invalid email
+                    address</span>
+            </div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" formControlName="password">
+            <div *ngIf="signInForm.controls['password'].touched && signInForm.controls['password'].dirty">
+                <span class="text-danger" *ngIf="signInForm.controls?.['password']?.errors?.['required']">Password is
+                    required</span>
+            </div>
         </div>
         <div class="d-flex justify-content-center my-3">
-            <button type="submit" class="btn btn-primary w-50">Submit</button>
+            <button type="submit" class="btn btn-primary w-50" [disabled]="signInForm.invalid">
+                <span role="status">Submit</span>
+                <span class="ms-1 spinner-border spinner-border-sm" aria-hidden="true" *ngIf="showSubmitBtnSpinner"></span>
+            </button>
         </div>
     </form>
 </div>
