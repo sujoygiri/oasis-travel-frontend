@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4" *ngFor="let destination of tropicalDestination">
                     <a [routerLink]="'/destination'+destination.routePath"
-                        class="tropical_destination_link link-underline link-underline-opacity-0 text-white">
+                        class="tropical_destination_link link-underline link-underline-opacity-0 text-white" (click)="setIntroImagePath(destination.imageUrl)">
                         <div class="tropical_destination_container">
                             <div class="image_container">
                                 <img [src]="destination.imageUrl" [alt]="destination.name">

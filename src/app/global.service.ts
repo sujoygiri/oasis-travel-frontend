@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 export interface ModalStatusType {
@@ -32,6 +33,30 @@ export interface DestinationRespType {
   isTropical: boolean;
 }
 
+export interface DestinationDetailResType {
+  name: string;
+  title: string;
+  text: string;
+  introImage:string,
+  at_a_glance: {
+    text: string;
+    currency: string;
+    popular_drink: string;
+    tipping_custom: string;
+    must_eat: string;
+    power_up: string;
+    language: string;
+    getting_there: string;
+    weather: string;
+    best_time_to_visit: string;
+    place_map_image_url: string;
+  };
+  things_to_do: {
+    content: string;
+    things_image_url: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -45,6 +70,7 @@ export class GlobalService {
   authStatus: boolean = false;
   successMessage: string = '';
   errorMessage: string = '';
+  destinationDetailIntroImage:string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -74,8 +100,27 @@ export class GlobalService {
     return this.http.get(SearchApiUrl, { withCredentials: true });
   }
 
-  getAllDestination():Observable<DestinationRespType[]> {
-    const DestinationUrl = 'http://localhost:3000/api/destination/all-destination';
-    return this.http.get<DestinationRespType[]>(DestinationUrl, { withCredentials: true });
+  getAllDestination(): Observable<DestinationRespType[]> {
+    const DestinationUrl =
+      'http://localhost:3000/api/destination/all-destination';
+    return this.http.get<DestinationRespType[]>(DestinationUrl, {
+      withCredentials: true,
+    });
+  }
+
+  getDestinationDetail(
+    region: string | undefined,
+    country: string | undefined,
+    place: string | undefined
+  ):Observable<DestinationDetailResType> {
+    let DestinationDetailUrl = ''
+    if(region && country && place){
+      DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}&country=${country}&place=${place}`;
+    }else if(region && country){
+      DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}&country=${country}`;
+    }else{
+      DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}`;
+    }
+    return this.http.get<DestinationDetailResType>(DestinationDetailUrl, { withCredentials: true });
   }
 }

@@ -44,4 +44,8 @@ export class DestinationComponent implements OnInit {
       }
     });
   }
+
+  setIntroImagePath(imageUrl:string):void{
+    this.globalService.destinationDetailIntroImage = imageUrl;
+  }
 }

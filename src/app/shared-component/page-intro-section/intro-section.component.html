@@ -2,7 +2,7 @@
     <div class="row align-items-start">
         <div class="col-sm-12 col-xl-8">
             <div class="intro_image">
-                <img class="w-100" [src]="'assets/'+introImage" [alt]="introTitle" srcset="">
+                <img class="w-100" [src]="introImage.includes('https')?introImage:'assets/'+introImage" [alt]="introTitle" srcset="">
             </div>
         </div>
         <div class="col-sm-12 col-xl-4">
