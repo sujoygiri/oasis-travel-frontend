@@ -1,1 +1,64 @@
-<app-page-intro-section [introImage]="introImage" [introTitle]="introTitle" [introText]="introText"></app-page-intro-section>
+<app-page-intro-section [introImage]="introImage" [introTitle]="introTitle"
+    [introText]="introText"></app-page-intro-section>
+<div class="destination my-4">
+    <div class="tropical_destination">
+        <div class="container text-center">
+            <div class="row gy-3 mb-4">
+                <h3 class="mt-3 tropical_heading">Tropical Treasures</h3>
+                <p class="mb-3 tropical_heading_text font-monospace">If you’re looking for sparkling sands and cerulean
+                    seas, we’ve got you covered. Whether you’re excited to dive into swimming, snorkeling, and
+                    watersports or just need to unwind on the beach, there are so many possibilities to explore within
+                    Mexico and the Caribbean. These are just a few of our favorites.
+                </p>
+                <div class="w-100 text-center">
+                    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"
+                        *ngIf="showLoadingSpinner">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" *ngFor="let destination of tropicalDestination">
+                    <a [routerLink]="'/destination'+destination.routePath"
+                        class="tropical_destination_link link-underline link-underline-opacity-0 text-white">
+                        <div class="tropical_destination_container">
+                            <div class="image_container">
+                                <img [src]="destination.imageUrl" [alt]="destination.name">
+                            </div>
+                            <div class="tropical_destination_text fs-3">{{ destination.name }}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row gy-3">
+                <h3 class="pt-3 tropical_heading">Where Would You Like To Go?</h3>
+                <div class="w-100 text-center">
+                    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"
+                        *ngIf="showLoadingSpinner">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4" *ngFor="let destination of allDestinationRowOne">
+                    <a [routerLink]="'/destination'+destination.routePath"
+                        class="tropical_destination_link link-underline link-underline-opacity-0 text-white">
+                        <div class="tropical_destination_container">
+                            <div class="image_container">
+                                <img [src]="destination.imageUrl" [alt]="destination.name">
+                            </div>
+                            <div class="tropical_destination_text fs-3">{{ destination.name }}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3" *ngFor="let destination of allDestinationRowTwo">
+                    <a [routerLink]="'/destination'+destination.routePath"
+                        class="tropical_destination_link link-underline link-underline-opacity-0 text-white">
+                        <div class="tropical_destination_container">
+                            <div class="image_container">
+                                <img [src]="destination.imageUrl" [alt]="destination.name">
+                            </div>
+                            <div class="tropical_destination_text fs-3">{{ destination.name }}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

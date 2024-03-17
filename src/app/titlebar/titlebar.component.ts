@@ -22,9 +22,10 @@ export class TitlebarComponent implements OnInit {
 
   }
 
-  openAuthenticationModal(type:string){
+  openAuthenticationModal(action:string){
     let modalStatus:ModalStatusType = {
-      type
+      type:'authentication',
+      action
     }
     this.globalService.modalStatusObj = modalStatus;
     this.globalService.mainModalObj.show(this.globalService.mainModalNode)

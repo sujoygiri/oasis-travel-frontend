@@ -1,5 +1,5 @@
 <div class="modal fade" id="main_modal" tabindex="-1" aria-labelledby="main_modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" style="margin:0 auto;">{{modalTitle}}</h1>
@@ -8,19 +8,22 @@
             </div>
             <div class="modal-body">
                 <div class="auth_form" *ngIf="!globalService.authStatus">
-                    <div *ngIf="showSignUpForm">
+                    <div *ngIf="showSignUpForm && globalService.modalStatusObj.action === 'sign_up'">
                         <app-sign-up></app-sign-up>
                     </div>
-                    <div *ngIf="showSignInForm">
+                    <div *ngIf="showSignInForm && globalService.modalStatusObj.action === 'sign_in'">
                         <app-sign-in></app-sign-in>
                     </div>
                 </div>
-                <div class="auth_status_message text-center" *ngIf="globalService.authStatus">
+                <div class="auth_status_message text-center" *ngIf="globalService.authStatus && globalService.modalStatusObj.type === 'authentication'">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <i class="bi bi-check-circle-fill mx-2" style="font-size: 1.5rem; color: rgb(23, 204, 38);"></i>
-                        <p class="m-0 fs-4">{{globalService.successMessage}}</p>
+                        <i class="bi bi-check-circle-fill mx-2" style="font-size: 1.5rem; margin-top: 0.3rem; color: rgb(23, 204, 38);"></i>
+                        <p class="m-0 fs-4">{{globalService.successMessage | titlecase}}</p>
                     </div>
                     <button class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                </div>
+                <div class="destination_search" *ngIf="showDestinationSearch && globalService.modalStatusObj.type === 'query'">
+                    <app-destination-search></app-destination-search>
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-center" *ngIf="!globalService.authStatus">

@@ -1,13 +1,14 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { GlobalService } from '../../global.service';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { DestinationSearchComponent } from '../destination-search/destination-search.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [SignUpComponent, SignInComponent, CommonModule],
+  imports: [CommonModule, SignUpComponent, SignInComponent, DestinationSearchComponent, TitleCasePipe],
   // providers: [GlobalService],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
@@ -15,6 +16,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 export class ModalComponent implements AfterViewInit {
   showSignInForm: boolean = false;
   showSignUpForm: boolean = false;
+  showDestinationSearch:boolean = false;
   modalTitle: string = '';
   constructor(public globalService: GlobalService) {}
 
@@ -29,23 +31,34 @@ export class ModalComponent implements AfterViewInit {
   }
 
   openModal() {
-    const { type } = this.globalService.modalStatusObj;
-    if (type === 'sign_in') {
+    const { type, action } = this.globalService.modalStatusObj;
+    if (action === 'sign_in') {
       this.changeToSignIn()
-    } else {
+    } 
+    if(action === 'sign_up') {
       this.changeToSignUp()
+    }
+    if(action === 'destination_search'){
+      this.changeToDestinationSearch()
     }
   }
 
   changeToSignIn() {
     this.showSignInForm = true;
     this.showSignUpForm = false;
+    this.globalService.modalStatusObj.action = 'sign_in'
     this.modalTitle = 'Sign In';
   }
 
   changeToSignUp() {
     this.showSignUpForm = true;
     this.showSignInForm = false;
+    this.globalService.modalStatusObj.action = 'sign_up'
     this.modalTitle = 'Sign Up';
+  }
+
+  changeToDestinationSearch(){
+    this.modalTitle = "Search Your Destination";
+    this.showDestinationSearch = true;
   }
 }

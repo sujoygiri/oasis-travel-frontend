@@ -15,6 +15,5 @@ export class IntroSectionComponent implements OnInit{
   @Input()
   introImage:string = ""
   ngOnInit() {
-    // console.log(this.introTitle)
   }
 }
