@@ -22,6 +22,19 @@ export class TitlebarComponent implements OnInit {
 
   }
 
+  handelLogout(){
+    this.globalService.handelLogout().subscribe({
+      next: (value) => {
+        if(value.success){
+          this.globalService.authStatus = false;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
   openAuthenticationModal(action:string){
     let modalStatus:ModalStatusType = {
       type:'authentication',

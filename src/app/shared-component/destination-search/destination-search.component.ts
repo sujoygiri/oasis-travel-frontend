@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { GlobalService } from '../../global.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -10,13 +10,13 @@ import { RouterLink } from '@angular/router';
   templateUrl: './destination-search.component.html',
   styleUrl: './destination-search.component.css',
 })
-export class DestinationSearchComponent implements OnInit {
+export class DestinationSearchComponent implements AfterViewInit {
   foundDestination: any = [];
 
   constructor(private globalService: GlobalService) {}
 
-  ngOnInit(): void {
-    this.searchDestination('');
+  ngAfterViewInit(): void {
+    this.searchDestination('')
   }
 
   handelSearch(event:any){

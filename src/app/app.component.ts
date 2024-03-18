@@ -3,12 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { TitlebarComponent } from './titlebar/titlebar.component';
 import { ModalComponent } from './shared-component/modal/modal.component';
 import { AuthApiResponseType, GlobalService } from './global.service';
+import { FooterComponent } from './footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     TitlebarComponent,
     RouterOutlet,
+    FooterComponent,
     ModalComponent
   ],
   templateUrl: './app.component.html',

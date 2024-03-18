@@ -1,0 +1,25 @@
+.logo_svg{
+    width: auto;
+    height: 2rem;
+  }
+  
+  @media screen and (max-width: 319px) {
+    .logo_svg{
+      width: auto;
+      height: 1.25rem;
+    }
+  }
+  
+  @media screen and (min-width: 320px) and (max-width: 576px) {
+    .logo_svg{
+      width: auto;
+      height: 1.5rem;
+    }
+  }
+  
+  @media screen and (min-width: 991px) {
+    .logo_svg{
+      width: 14rem;
+      height: 1.75rem;
+    }
+  }

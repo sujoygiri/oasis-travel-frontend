@@ -4,11 +4,19 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { DestinationSearchComponent } from '../destination-search/destination-search.component';
+import { BookingComponent } from '../booking/booking.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, SignUpComponent, SignInComponent, DestinationSearchComponent, TitleCasePipe],
+  imports: [
+    CommonModule,
+    SignUpComponent,
+    SignInComponent,
+    DestinationSearchComponent,
+    BookingComponent,
+    TitleCasePipe
+  ],
   // providers: [GlobalService],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
@@ -16,9 +24,10 @@ import { DestinationSearchComponent } from '../destination-search/destination-se
 export class ModalComponent implements AfterViewInit {
   showSignInForm: boolean = false;
   showSignUpForm: boolean = false;
-  showDestinationSearch:boolean = false;
+  showDestinationSearch: boolean = false;
+  showBookingForm: boolean = false;
   modalTitle: string = '';
-  constructor(public globalService: GlobalService) {}
+  constructor(public globalService: GlobalService) { }
 
   ngAfterViewInit(): void {
     const mainModalNode = document.getElementById('main_modal');
@@ -32,33 +41,45 @@ export class ModalComponent implements AfterViewInit {
 
   openModal() {
     const { type, action } = this.globalService.modalStatusObj;
-    if (action === 'sign_in') {
-      this.changeToSignIn()
-    } 
-    if(action === 'sign_up') {
-      this.changeToSignUp()
-    }
-    if(action === 'destination_search'){
-      this.changeToDestinationSearch()
+    switch (action) {
+      case 'sign_in':
+        this.changeToSignIn();
+        break;
+      case 'sign_up':
+        this.changeToSignUp();
+        break;
+      case 'destination_search':
+        this.changeToDestinationSearch();
+        break;
+      case 'booking':
+        this.changeToBooking();
+        break;
+      default:
+        break;
     }
   }
 
   changeToSignIn() {
     this.showSignInForm = true;
     this.showSignUpForm = false;
-    this.globalService.modalStatusObj.action = 'sign_in'
+    this.globalService.modalStatusObj.action = 'sign_in';
     this.modalTitle = 'Sign In';
   }
 
   changeToSignUp() {
     this.showSignUpForm = true;
     this.showSignInForm = false;
-    this.globalService.modalStatusObj.action = 'sign_up'
+    this.globalService.modalStatusObj.action = 'sign_up';
     this.modalTitle = 'Sign Up';
   }
 
-  changeToDestinationSearch(){
+  changeToDestinationSearch() {
     this.modalTitle = "Search Your Destination";
     this.showDestinationSearch = true;
+  }
+
+  changeToBooking() {
+    this.modalTitle = "Booking";
+    this.showBookingForm = true;
   }
 }

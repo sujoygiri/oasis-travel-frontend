@@ -37,7 +37,7 @@ export interface DestinationDetailResType {
   name: string;
   title: string;
   text: string;
-  introImage:string,
+  introImage: string,
   at_a_glance: {
     text: string;
     currency: string;
@@ -70,9 +70,9 @@ export class GlobalService {
   authStatus: boolean = false;
   successMessage: string = '';
   errorMessage: string = '';
-  destinationDetailIntroImage:string = '';
+  destinationDetailIntroImage: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   handelSignUp(userData: SignUpUserDataType): Observable<AuthApiResponseType> {
     const signUpApiUrl = 'http://localhost:3000/api/auth/signup';
@@ -86,6 +86,11 @@ export class GlobalService {
     return this.http.post<AuthApiResponseType>(signInApiUrl, userData, {
       withCredentials: true,
     });
+  }
+
+  handelLogout(): Observable<AuthApiResponseType> {
+    const logoutApiUrl = 'http://localhost:3000/api/auth/logout';
+    return this.http.get<AuthApiResponseType>(logoutApiUrl, { withCredentials: true });
   }
 
   handelUserAuthVerification(): Observable<AuthApiResponseType> {
@@ -112,13 +117,13 @@ export class GlobalService {
     region: string | undefined,
     country: string | undefined,
     place: string | undefined
-  ):Observable<DestinationDetailResType> {
-    let DestinationDetailUrl = ''
-    if(region && country && place){
+  ): Observable<DestinationDetailResType> {
+    let DestinationDetailUrl = '';
+    if (region && country && place) {
       DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}&country=${country}&place=${place}`;
-    }else if(region && country){
+    } else if (region && country) {
       DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}&country=${country}`;
-    }else{
+    } else {
       DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}`;
     }
     return this.http.get<DestinationDetailResType>(DestinationDetailUrl, { withCredentials: true });
