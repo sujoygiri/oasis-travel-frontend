@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { GlobalService } from '../../global.service';
 
 @Component({
   selector: 'app-page-intro-section',
@@ -14,6 +15,10 @@ export class IntroSectionComponent implements OnInit{
   introText:string = ""
   @Input()
   introImage:string = ""
+
+  constructor(public globalService:GlobalService){}
+
   ngOnInit() {
   }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import { GlobalService, ModalStatusType } from '../global.service';
 import { CommonModule } from '@angular/common';
 
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TitlebarComponent implements OnInit {
 
-  constructor(public globalService:GlobalService){}
+  constructor(public globalService:GlobalService, private router:Router){}
 
   ngOnInit(): void {
 
@@ -27,6 +27,7 @@ export class TitlebarComponent implements OnInit {
       next: (value) => {
         if(value.success){
           this.globalService.authStatus = false;
+          this.router.navigate(['/'])
         }
       },
       error: (err) => {

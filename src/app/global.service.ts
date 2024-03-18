@@ -74,6 +74,12 @@ export class GlobalService {
 
   constructor(private http: HttpClient) { }
 
+  openBookingModal(){
+    this.modalStatusObj.type = 'booking';
+    this.modalStatusObj.action = 'booking';
+    this.mainModalObj.show(this.mainModalNode);
+  }
+
   handelSignUp(userData: SignUpUserDataType): Observable<AuthApiResponseType> {
     const signUpApiUrl = 'http://localhost:3000/api/auth/signup';
     return this.http.post<AuthApiResponseType>(signUpApiUrl, userData, {

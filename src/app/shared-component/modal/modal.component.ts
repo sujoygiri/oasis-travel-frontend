@@ -79,7 +79,7 @@ export class ModalComponent implements AfterViewInit {
   }
 
   changeToBooking() {
-    this.modalTitle = "Booking";
+    this.modalTitle = "Start Planning";
     this.showBookingForm = true;
   }
 }
