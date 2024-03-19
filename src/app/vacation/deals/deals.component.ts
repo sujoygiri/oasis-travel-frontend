@@ -1,29 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Deals, GlobalService } from '../../global.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-deals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,CurrencyPipe],
   templateUrl: './deals.component.html',
   styleUrl: './deals.component.css'
 })
 export class DealsComponent implements OnInit {
   deals: Deals[] = [];
-  dealsType: string = '';
-  constructor(private globalService: GlobalService, private activatedRoute: ActivatedRoute) { }
+  constructor(private globalService: GlobalService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        this.dealsType = param['dealsType'];
-      }
-    });
-    this.globalService.getDeals(this.dealsType).subscribe({
+    this.globalService.getDeals('').subscribe({
       next: (resp) => {
-        console.log(resp);
+        this.deals = resp
       }
     });
   }

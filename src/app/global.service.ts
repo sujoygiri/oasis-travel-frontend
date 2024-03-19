@@ -185,3 +185,4 @@ export class GlobalService {
     return this.http.get<Deals[]>(dealsApiUrl, { withCredentials: true });
   }
 }
+

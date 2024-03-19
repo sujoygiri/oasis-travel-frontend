@@ -2,9 +2,9 @@
     <div class="row">
         <h3>Vacation Deals</h3>
         <div class="col-md-6 col-lg-4 my-3" *ngFor="let deal of deals">
-            <a href="" class="link-underline link-underline-opacity-0">
+            <a [href]="'vacations/deals/' + deal.name + '/' + deal.code" class="link-underline link-underline-opacity-0">
                 <div class="card h-100 deal_card">
-                    <img [src]="deal.image" class="card-img-top " [alt]="deal.name">
+                    <img [src]="'https://oasis-image.blr1.cdn.digitaloceanspaces.com/'+deal.image" class="card-img-top " [alt]="deal.name">
                     <div class="card-body">
                         <div class="deal_name">
                             <h5 class="card-title text-start">{{deal.title}}</h5>
@@ -14,8 +14,8 @@
                         </div>
                         <div class="night_and_price_container d-flex justify-content-end mt-3">
                             <div class="night_price d-flex flex-column " style="color: #2E5C8A;">
-                                <p class="text-end m-0">{{deal.los_units}}</p>
-                                <p class="text-end m-0">{{deal.advertsied_price}}</p>
+                                <p class="text-end m-0"><span>{{deal.length_of_stay}}&nbsp;</span><span>{{deal.los_units}}</span></p>
+                                <p class="text-end m-0">from&nbsp;{{deal.advertsied_price | currency}}</p>
                             </div>
                         </div>
                     </div>
