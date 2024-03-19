@@ -1,59 +1,49 @@
-<div class="container text-center">
+<div class="container">
     <div class="d-flex">
-        <form>
+        <form [formGroup]="bookingForm" (ngSubmit)="handelBooking()">
             <div class="row g-2">
-                <h5 class="my-2 text-start">Your contact details</h5>
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="first_name">
-                        <label for="first_name">First Name</label>
-                    </div>
+                <h6 class="my-2 text-start">Your contact details</h6>
+                <div class="col-12">
+                    <label class="form-label" for="first_name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first_name" formControlName="firstName">
                 </div>
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="last_name">
-                        <label for="last_name">Last Name</label>
-                    </div>
+                <div class="col-12">
+                    <label class="form-label" for="last_name">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" formControlName="lastName">
                 </div>
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="email" class="form-control" id="email">
-                        <label for="email">Email</label>
-                    </div>
+                <div class="col-12">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
                 </div>
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="phone">
-                        <label for="phone">Phone</label>
-                    </div>
+                <div class="col-12">
+                    <label class="form-label" for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" formControlName="phone">
                 </div>
             </div>
             <div>
-                <h5 class="mt-3 mb-2 text-start">Tell us about your travel plans</h5>
+                <h6 class="mt-3 mb-2 text-start">Tell us about your travel plans</h6>
             </div>
             <div class="row g-3">
                 <div class="col-12">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="destination">
-                        <label for="destination">Destination</label>
-                    </div>
+                    <label class="form-label" for="destination">Destination</label>
+                    <select class="form-select form-select-lg" id="destination" style="font-size: 1rem;" formControlName="destination">
+                        <option [value]="name" *ngFor="let name of allDestinationName">{{name}}</option>
+                    </select>
                 </div>
                 <div class="col-12">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" id="total_traveler">
-                        <label for="total_traveler">Total Traveler</label>
-                    </div>
+                    <label class="form-label" for="total_traveler">Total Traveler</label>
+                    <input type="text" class="form-control" id="total_traveler" formControlName="totalTraveler">
                 </div>
             </div>
             <div class="form-check text-start mt-3 mb-3">
-                <input class="form-check-input" type="radio" name="planning_mode" id="ready">
-                <label class="form-check-label" for="ready">
+                <input class="form-check-input" type="radio" value="ready" name="planningMode" id="ready" formControlName="planningMode">
+                <label class="form-label" class="form-check-label" for="ready">
                     Bags packed, I'm ready to go!
                 </label>
             </div>
             <div class="form-check text-start mb-1">
-                <input class="form-check-input" type="radio" name="planning_mode" id="pending">
-                <label class="form-check-label" for="pending">
+                <input class="form-check-input" type="radio" value="pending" name="planningMode" id="pending" formControlName="planningMode">
+                <label class="form-label" class="form-check-label" for="pending">
                     Still in planning mode
                 </label>
             </div>

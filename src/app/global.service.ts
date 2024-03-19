@@ -57,6 +57,45 @@ export interface DestinationDetailResType {
   };
 }
 
+export interface Deals {
+  title: string;
+  name: string;
+  type: string;
+  star_rating: string;
+  image: string;
+  destination: [
+    {
+      name: string;
+      parent: String;
+    }
+  ],
+  advertsied_price: string;
+  length_of_stay: string;
+  los_units: string;
+  includes: {
+    air: string;
+    hotel: string;
+    rental_car: string;
+    sightseeing: string;
+    transfer: string;
+    all_inclusive: string;
+    adults_only: string;
+    luxary: string | undefined;
+    beach: string | undefined;
+    casino: string | undefined;
+    family: string | undefined;
+    golf_and_spa: string | undefined;
+    honeymoon: string | undefined;
+    lastMinute: string | undefined;
+  },
+  featured: string;
+  hot_deal: string;
+  exclusive: string;
+  my_time: string;
+  get_carried_away: string;
+  code: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -68,13 +107,14 @@ export class GlobalService {
   mainModalNode!: any;
   mainModalObj!: any;
   authStatus: boolean = false;
+  bookingStatus: boolean = false;
   successMessage: string = '';
   errorMessage: string = '';
   destinationDetailIntroImage: string = '';
 
   constructor(private http: HttpClient) { }
 
-  openBookingModal(){
+  openBookingModal() {
     this.modalStatusObj.type = 'booking';
     this.modalStatusObj.action = 'booking';
     this.mainModalObj.show(this.mainModalNode);
@@ -133,5 +173,15 @@ export class GlobalService {
       DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}`;
     }
     return this.http.get<DestinationDetailResType>(DestinationDetailUrl, { withCredentials: true });
+  }
+
+  handelBooking(bookingData: any): Observable<any> {
+    const BookingApiUrl = 'http://localhost:3000/api/destination/booking';
+    return this.http.post<any>(BookingApiUrl, bookingData, { withCredentials: true });
+  }
+
+  getDeals(query: string): Observable<Deals[]> {
+    let dealsApiUrl = `http://localhost:3000/api/deal/get-deals?type=${query}`;
+    return this.http.get<Deals[]>(dealsApiUrl, { withCredentials: true });
   }
 }

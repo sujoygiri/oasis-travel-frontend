@@ -4,18 +4,18 @@
         <div class="col-md-6 col-lg-4 my-3" *ngFor="let deal of deals">
             <a href="" class="link-underline link-underline-opacity-0">
                 <div class="card h-100 deal_card">
-                    <img [src]="deal.imageLink" class="card-img-top " alt="...">
+                    <img [src]="deal.image" class="card-img-top " [alt]="deal.name">
                     <div class="card-body">
                         <div class="deal_name">
                             <h5 class="card-title text-start">{{deal.title}}</h5>
                         </div>
                         <div class="place_name d-flex justify-content-start">
-                            <p class="card-text">{{deal.place}}</p>
+                            <p class="card-text"><span>{{deal.destination[0].name}}&comma;&nbsp;</span>{{deal.destination[0].parent}}<span></span></p>
                         </div>
                         <div class="night_and_price_container d-flex justify-content-end mt-3">
                             <div class="night_price d-flex flex-column " style="color: #2E5C8A;">
-                                <p class="text-end m-0">{{deal.nights}}</p>
-                                <p class="text-end m-0">{{deal.price}}</p>
+                                <p class="text-end m-0">{{deal.los_units}}</p>
+                                <p class="text-end m-0">{{deal.advertsied_price}}</p>
                             </div>
                         </div>
                     </div>
