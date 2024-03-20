@@ -3,7 +3,7 @@
   <p class="mb-0">Explore our different vacation types.</p>
   <div class="row">
     <div class="col-md-4 mt-2" *ngFor="let vType of vacationTypeRow1">
-      <a href="" class="vacation_type_link link-underline link-underline-opacity-0 text-white">
+      <a [href]="'vacations/'+vType.urlPath" class="vacation_type_link link-underline link-underline-opacity-0 text-white">
         <div class="vacation_type">
           <div class="image_container">
             <img [src]="vType.imageUrl" [alt]="vType.type">
@@ -17,7 +17,7 @@
 <div class="container text-center my-3">
   <div class="row">
     <div class="col-md-3 mt-2" *ngFor="let vType of vacationTypeRow2">
-      <a href="" class="vacation_type_link link-underline link-underline-opacity-0 text-white">
+      <a [href]="'vacations/'+vType.urlPath" class="vacation_type_link link-underline link-underline-opacity-0 text-white">
         <div class="vacation_type">
           <div class="image_container">
             <img [src]="vType.imageUrl" [alt]="vType.type">

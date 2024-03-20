@@ -4,7 +4,8 @@ import {CommonModule} from "@angular/common";
 interface vacationType{
   id:number,
   type:string,
-  imageUrl:string
+  imageUrl:string,
+  urlPath:string
 }
 @Component({
   selector: 'app-vacation-type',
@@ -18,39 +19,46 @@ export class VacationTypeComponent {
     {
       id:1,
       type:'All Inclusive',
-      imageUrl:'assets/all-inclusive-drilldown.jpg'
+      imageUrl:'assets/all-inclusive-drilldown.jpg',
+      urlPath:'all-inclusive'
     },
     {
       id:2,
       type:'Family',
-      imageUrl:'assets/family-drilldown.jpg'
+      imageUrl:'assets/family-drilldown.jpg',
+      urlPath:'family'
     },
     {
       id:3,
       type:'Adults Only',
-      imageUrl:'assets/adult-only-drilldown.jpg'
+      imageUrl:'assets/adult-only-drilldown.jpg',
+      urlPath:'adults-only'
     }
   ]
   vacationTypeRow2:vacationType[] = [
     {
       id:1,
       type:'Honeymoon',
-      imageUrl:'assets/honeymoon-drilldown.jpg'
+      imageUrl:'assets/honeymoon-drilldown.jpg',
+      urlPath:'honeymoon'
     },
     {
       id:2,
       type:'Last Minute',
-      imageUrl:'assets/last-minute-drilldown.jpg'
+      imageUrl:'assets/last-minute-drilldown.jpg',
+      urlPath:'last-minute'
     },
     {
       id:3,
       type:'Beach',
-      imageUrl:'assets/woman-swing-at-the-beach.jpg'
+      imageUrl:'assets/woman-swing-at-the-beach.jpg',
+      urlPath:'beach'
     },
     {
       id:4,
       type:'Exotic',
-      imageUrl:'assets/exotic-drilldown.jpg'
+      imageUrl:'assets/exotic-drilldown.jpg',
+      urlPath:'exotic'
     }
   ]
 }
