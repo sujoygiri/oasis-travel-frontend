@@ -13,61 +13,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VacationTypeDetailsComponent implements OnInit {
   @Input()
-  introTitle: string = 'All-Inclusive Vacation Packages: Leave Your Worries and Wallet Behind';
+  introTitle: string = '';
   @Input()
-  introText: string = "Whether you're looking for a romantic escape, an adventure with friends, or a memorable family vacation, we’ve got all-inclusive getaways with your name on it. Between gourmet dining, thrilling activities, and endless entertainment for everyone – including kids clubs at select resorts – we're here to craft your complete all-inclusive package at one great price. Liberty Travel agents are experts in the destinations you seek, so pack everything but your worries and indulge with us.";
+  introText: string = '';
   @Input()
-  introImage: string = 'all-inclusive-drilldown.jpg';
+  introImage: string = '';
   @Input()
   vacationType: string = '';
+  vacationTypeTitle:string = '';
+  vacationTypeText:string = '';
+  vacationTypeImage:string = ''
 
   constructor(private globalService: GlobalService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe({
       next: (value) => {
-        this.vacationType = this.getTransformedVacationType(value['vacationType']);
+        this.vacationType = value['vacationType'];
       },
     });
+    this.globalService.getVacationTypeDetail(this.vacationType).subscribe({
+      next: (value) => {
+        this.introTitle = value.title;
+        this.introText = value.text;
+        this.introImage = value.imageUrl;
+        this.vacationTypeTitle = value.detailTitle;
+        this.vacationTypeText = value.detailText;
+        this.vacationTypeImage = value.detailImageUrl;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
-
-  getTransformedVacationType(type: string): string {
-    let transformedType: string = '';
-    switch (type) {
-      case 'all-inclusive':
-        transformedType = 'All Inclusive';
-        break;
-      case 'family':
-        transformedType = 'Family';
-        break;
-      case 'adults-only':
-        transformedType = 'Adults Only';
-        break;
-      case 'honeymoon':
-        transformedType = 'Honeymoon';
-        break;
-      case 'last-minute':
-        transformedType = 'Last Minute';
-        break;
-      case 'beach':
-        transformedType = 'Beach';
-        break;
-      case 'exotic':
-        transformedType = 'Exotic';
-        break;
-      // case 'family':
-      //   transformedType = 'Family';
-      //   break;
-      // case 'all-inclusive':
-      //   transformedType = 'All Inclusive';
-      //   break;
-      // case 'family':
-      //   transformedType = 'Family';
-      //   break;
-      default:
-        break;
-    }
-    return transformedType;
-  }
-
 }
