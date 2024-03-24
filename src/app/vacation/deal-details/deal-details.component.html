@@ -23,7 +23,7 @@
                             href="tel:1-888-343-2128">1-888-343-2128</a> to connect with a
                         travel expert.</p>
                     <div class="inquire_section pb-3">
-                        <button class="btn btn-danger w-75">Inquire</button>
+                        <button class="btn btn-danger w-75" (click)="handelBooking()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -59,23 +59,23 @@
                     <div class="deal_info">
                         <h4 class="deal_name">{{dealDetails.hotels[0].name}}</h4>
                         <p class="deal_description my-3">{{dealDetails.hotels[0].description}}</p>
-                        <h4>Amenities</h4>
+                        <h4 *ngIf="allAmenities.length">Amenities</h4>
                         <div class="all_amenities">
                             <div class="amenities_panel border-2 border-bottom border-success" *ngFor="let amenities of allAmenities">
                                 <p class="gap-1 w-100 mb-1">
                                     <a class="w-100 py-2 d-inline-flex justify-content-between link-underline link-underline-opacity-0 text-danger"
-                                        data-bs-toggle="collapse" [routerLink]="[]" fragment="" attr.data-bs-target="#{{amenities.id}}" role="button"
+                                        data-bs-toggle="collapse" fragment="" attr.data-bs-target="#{{amenities.id}}" role="button"
                                         aria-expanded="false" attr.aria-controls="{{amenities.id}}" (click)="showCorrectSymbol(amenities.id)">
-                                        <div class="amenities_panel_text">{{amenities.type}}</div>
+                                        <div class="amenities_panel_text">{{amenities.name}}</div>
                                         <i class="bi" ngClass="{{currentAmenitiesId === amenities.id ? currentClassName : 'bi-chevron-down'}}" style="cursor: pointer;" ></i>
                                     </a>
                                 </p>
                                 <div class="collapse" [id]="amenities.id">
-                                    <p>
-                                        Some placeholder content for the collapse component. This panel is hidden by
-                                        default
-                                        but revealed when the user activates the relevant trigger.
-                                    </p>
+                                    <div class="row">
+                                        <div class="col-6" *ngFor="let value of amenities.value">
+                                            <p>{{value}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

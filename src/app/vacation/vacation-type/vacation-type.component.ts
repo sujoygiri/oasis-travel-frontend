@@ -56,9 +56,9 @@ export class VacationTypeComponent {
     },
     {
       id:4,
-      type:'Exotic',
-      imageUrl:'assets/exotic-drilldown.jpg',
-      urlPath:'exotic'
+      type:'Luxury',
+      imageUrl:'assets/luxury-drilldown.jpg',
+      urlPath:'luxury'
     }
   ]
 }

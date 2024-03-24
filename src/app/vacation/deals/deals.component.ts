@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Deals, GlobalService } from '../../global.service';
 
@@ -9,15 +15,24 @@ import { Deals, GlobalService } from '../../global.service';
   templateUrl: './deals.component.html',
   styleUrl: './deals.component.css',
 })
-export class DealsComponent implements OnInit {
+export class DealsComponent implements OnInit, OnChanges {
   @Input()
   vacationType: string = 'Vacation';
   deals: Deals[] = [];
   constructor(private globalService: GlobalService) {}
 
   ngOnInit(): void {
-    let type = this.getTransformedVacationType(this.vacationType) || 'Vacation';    
-    this.globalService.getDeals(type).subscribe({
+    let type = this.getTransformedVacationType(this.vacationType) || 'Vacation';
+    this.globalService.getDeals(type,18).subscribe({
+      next: (resp) => {
+        this.deals = resp;
+      },
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    let type = this.getTransformedVacationType(this.vacationType) || 'Vacation';
+    this.globalService.getDeals(type,18).subscribe({
       next: (resp) => {
         this.deals = resp;
       },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import { GlobalService, ModalStatusType } from '../global.service';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     RouterLink,
-    CommonModule
+    CommonModule,
+    RouterLinkActive
   ],
   // providers:[GlobalService],
   templateUrl: './titlebar.component.html',

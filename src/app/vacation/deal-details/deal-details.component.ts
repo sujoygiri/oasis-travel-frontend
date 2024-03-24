@@ -4,8 +4,9 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 
 interface Amenities {
-  type: string;
   id: string;
+  name:string
+  value: string[];
 }
 @Component({
   selector: 'app-deal-details',
@@ -97,6 +98,12 @@ export class DealDetailsComponent implements OnInit {
           longitude: '',
           latitude: '',
         },
+        dining_entertainment: [],
+        disabled_facilities: [],
+        family_facilities: [],
+        features: [],
+        liesure_recreation: [],
+        nearby: [],
         checkin: '',
         checkout: '',
         rooms: '',
@@ -186,14 +193,7 @@ export class DealDetailsComponent implements OnInit {
   };
   checkInTime: string = '';
   checkOutTime: string = '';
-  allAmenities: Array<Amenities> = [
-    { type: 'Property Features', id: 'property_features' },
-    { type: 'Dining & Entertainment', id: 'dining_and_entertainment' },
-    { type: 'Disabled Facilities', id: 'disabled_facilities' },
-    { type: 'Leisure & Recreation', id: 'leisure_and_recreation' },
-    { type: 'Family Facilities', id: 'family_facilities' },
-    { type: 'Nearby', id: 'nearby' },
-  ];
+  allAmenities: Array<Amenities> = [];
   currentAmenitiesId: string = '';
   currentClassName: string = 'bi-chevron-down';
 
@@ -210,8 +210,50 @@ export class DealDetailsComponent implements OnInit {
     });
     this.globalService.getDealsDetail(this.dealCode).subscribe({
       next: (response) => {
-        console.log(response);
         this.dealDetails = response;
+        let hotelDetail = response?.hotels[0];
+        if (hotelDetail.features.length) {
+          this.allAmenities.push({
+            id: 'features',
+            name: 'Features',
+            value: hotelDetail.features,
+          });
+        }
+        if (hotelDetail.family_facilities.length) {
+          this.allAmenities.push({
+            id: 'family_facilities',
+            name: 'Family Facilities',
+            value: hotelDetail.family_facilities,
+          });
+        }
+        if (hotelDetail.dining_entertainment.length) {
+          this.allAmenities.push({
+            id: 'dining_entertainment',
+            name: 'Dining Entertainment',
+            value: hotelDetail.dining_entertainment,
+          });
+        }
+        if (hotelDetail.disabled_facilities.length) {
+          this.allAmenities.push({
+            id: 'disabled_facilities',
+            name: 'Disabled Facilities',
+            value: hotelDetail.disabled_facilities,
+          });
+        }
+        if (hotelDetail.liesure_recreation.length) {
+          this.allAmenities.push({
+            id: 'liesure_recreation',
+            name: 'Liesure Recreation',
+            value: hotelDetail.liesure_recreation,
+          });
+        }
+        if (hotelDetail.nearby.length) {
+          this.allAmenities.push({
+            id: 'nearby',
+            name: 'Nearby',
+            value: hotelDetail.nearby,
+          });
+        }
         let checkIn = Number.parseInt(response.hotels[0].checkin) / 100;
         let checkOut = Number.parseInt(response.hotels[0].checkout) / 100;
         this.checkInTime =
@@ -231,5 +273,9 @@ export class DealDetailsComponent implements OnInit {
       this.currentClassName === 'bi-chevron-down'
         ? 'bi-chevron-up'
         : 'bi-chevron-down';
+  }
+
+  handelBooking(){
+    this.globalService.openBookingModal()
   }
 }

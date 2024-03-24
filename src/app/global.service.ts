@@ -187,6 +187,12 @@ export interface DealDetailType {
         longitude: string;
         latitude: string;
       };
+      dining_entertainment: string[];
+      disabled_facilities: string[];
+      family_facilities: string[];
+      features: string[];
+      liesure_recreation: string[];
+      nearby: string[];
       checkin: string;
       checkout: string;
       rooms: string;
@@ -365,14 +371,16 @@ export class GlobalService {
     });
   }
 
-  getDeals(query: string): Observable<Deals[]> {
-    const dealsApiUrl = `http://localhost:3000/api/deal/get-deals?type=${query}`;
+  getDeals(type: string, limit:number): Observable<Deals[]> {
+    const dealsApiUrl = `http://localhost:3000/api/deal/get-deals?type=${type}&limit=${limit}`;
     return this.http.get<Deals[]>(dealsApiUrl, { withCredentials: true });
   }
 
-  getDealsDetail(code: string):Observable<DealDetailType> {
+  getDealsDetail(code: string): Observable<DealDetailType> {
     const dealDetailApiUrl = `http://localhost:3000/api/deal/deal-detail?code=${code}`;
-    return this.http.get<DealDetailType>(dealDetailApiUrl, { withCredentials: true });
+    return this.http.get<DealDetailType>(dealDetailApiUrl, {
+      withCredentials: true,
+    });
   }
 
   getVacationTypeDetail(vacationType: string): Observable<VacationTypeDetail> {
