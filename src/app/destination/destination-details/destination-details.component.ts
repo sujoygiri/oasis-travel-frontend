@@ -37,17 +37,22 @@ export class DestinationDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let region: string | undefined = '';
-    let country: string | undefined = '';
-    let place: string | undefined = '';
+    let region: string = '';
+    let country: string = '';
+    let place: string = '';
     this.showLoadingSpinner = true;
     this.activatedRoute.params.subscribe({
       next: (value) => {
         region = value['region'];
         country = value['country'];
         place = value['place'];
-      },
+        this.getDestinationDetails(region,country,place)
+      }
     });
+    
+  }
+
+  getDestinationDetails(region:string, country:string, place:string){
     this.globalService.getDestinationDetail(region, country, place).subscribe({
       next: (value) => {
         // console.log(value);
@@ -77,4 +82,5 @@ export class DestinationDetailsComponent implements OnInit {
       },
     });
   }
+
 }

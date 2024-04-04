@@ -4,17 +4,14 @@
         <div class="col-12 col-md-6">
             <div class="vacation_type_detail">
                 <div class="vacation_type_title">
-                    <h4>Here’s What’s Included in an All-Inclusive Vacation Package — The Oasis Travel Way</h4>
+                    <h4>{{vacationTypeTitle}}</h4>
                 </div>
-                <div class="vacation_type_text">
-                    <p>Simply put, a lot. At an all-inclusive resort, you pay one flat price for your room, all gourmet meals and drinks (including premium cocktails). But, that’s just the beginning. Rolled into the deal are a host of activities, like water sports, tennis, golf, cooking classes, yoga, wine tastings, entertainment programs, kid camps and teens clubs.</p>
-                    <p><strong>The Oasis Travel Difference:</strong> We partner with top resorts to bring you My Time, a set of exclusive perks such as, express check-in/out, welcome gifts, and spa or resort credits at no additional cost.</p>
-                </div>
+                <div class="vacation_type_text" [innerHTML]="vacationTypeText"></div>
             </div>
         </div>
         <div class="col-12 col-md-6">
             <div class="vacation_highlight_image d-flex justify-content-center">
-                <img class="w-75" style="vertical-align: middle;" src="https://www.libertytravel.com/sites/default/files/styles/full_size/public/all%20inclusive-c.png" alt="">
+                <img class="w-50" [src]="vacationTypeImage" [alt]="vacationType">
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@ export interface DestinationDetailResType {
   name: string;
   title: string;
   text: string;
-  introImage: string,
+  introImage: string;
   at_a_glance: {
     text: string;
     currency: string;
@@ -68,7 +68,7 @@ export interface Deals {
       name: string;
       parent: String;
     }
-  ],
+  ];
   advertsied_price: string;
   length_of_stay: string;
   los_units: string;
@@ -87,13 +87,198 @@ export interface Deals {
     golf_and_spa: string | undefined;
     honeymoon: string | undefined;
     lastMinute: string | undefined;
-  },
+  };
   featured: string;
   hot_deal: string;
   exclusive: string;
   my_time: string;
   get_carried_away: string;
   code: string;
+}
+
+export interface VacationTypeDetail {
+  title: string;
+  text: string;
+  imageUrl: string;
+  detailTitle: string;
+  detailText: string;
+  detailImageUrl: string;
+  urlPath: string;
+}
+
+export interface DealDetailType {
+  valid: string;
+  status: string;
+  title: string;
+  offer_name: string;
+  includes: {
+    air: string;
+    hotel: string;
+    rental_car: string;
+    sightseeing: string;
+    transfer: string;
+    all_inclusive: string;
+    adults_only: string;
+  };
+  featured: string;
+  exclusive: string;
+  mytime: string;
+  get_carried_away: string;
+  offer_type: string;
+  offer_categories: [
+    {
+      id: string;
+      name: string;
+    }
+  ];
+  image: {
+    name: string;
+    alt: string;
+    file_path: string;
+    photo_caption: string;
+    photo_caption_color: string;
+  };
+  offer_description: string;
+  offer_valid: {
+    start: string;
+    end: string;
+    date_range: string;
+  };
+  offer_publish: {
+    publish: string;
+    expire: string;
+  };
+  trip_dates: {
+    depart: string;
+    return: string;
+    los: string;
+    los_units: string;
+    date_range: string;
+  };
+  destinations: [
+    {
+      term_id: string;
+      destination_name: string;
+      parent: string;
+      destination_code: string;
+      state: string;
+      country: string;
+      world_region: string;
+      hide_fee: string;
+    }
+  ];
+  hotels: [
+    {
+      hotel_id: string;
+      name: string;
+      brand: {
+        id: string;
+        name: string;
+      };
+      description: string;
+      star_rating: string;
+      address: {
+        street_number: string;
+        street_name: string;
+        city: string;
+        state: string;
+        postal_code: string;
+        country: string;
+        longitude: string;
+        latitude: string;
+      };
+      dining_entertainment: string[];
+      disabled_facilities: string[];
+      family_facilities: string[];
+      features: string[];
+      liesure_recreation: string[];
+      nearby: string[];
+      checkin: string;
+      checkout: string;
+      rooms: string;
+      property_specialties: string[];
+      disclaimer: string;
+      mytime: {
+        short: string;
+        long: string;
+      };
+    }
+  ];
+  top_choice: string;
+  price: {
+    priced_on: string;
+    base_price: string;
+    transfer_price: string;
+    transfer_type: string;
+    sightseeing_price: string;
+    lowest_priced_city: string;
+    total_price: string;
+    advertised_price: string;
+  };
+  departure_cities: [
+    {
+      city_name: string;
+      airfare_price: string;
+      total_price: string;
+      advertised_price: string;
+      outbound_carrier: string;
+      inbound_carrier: string;
+      outbound_fare_class: string;
+      inbound_fare_class: string;
+      outbound_routing: string;
+      inbound_routing: string;
+    },
+    {
+      city_name: string;
+      airfare_price: string;
+      total_price: string;
+      advertised_price: string;
+      outbound_carrier: string;
+      inbound_carrier: string;
+      outbound_fare_class: string;
+      inbound_fare_class: string;
+      outbound_routing: string;
+      inbound_routing: string;
+    },
+    {
+      city_name: string;
+      airfare_price: string;
+      total_price: string;
+      advertised_price: string;
+      outbound_carrier: string;
+      inbound_carrier: string;
+      outbound_fare_class: string;
+      inbound_fare_class: string;
+      outbound_routing: string;
+      inbound_routing: string;
+    },
+    {
+      city_name: string;
+      airfare_price: string;
+      total_price: string;
+      advertised_price: string;
+      outbound_carrier: string;
+      inbound_carrier: string;
+      outbound_fare_class: string;
+      inbound_fare_class: string;
+      outbound_routing: string;
+      inbound_routing: string;
+    },
+    {
+      city_name: string;
+      airfare_price: string;
+      total_price: string;
+      advertised_price: string;
+      outbound_carrier: string;
+      inbound_carrier: string;
+      outbound_fare_class: string;
+      inbound_fare_class: string;
+      outbound_routing: string;
+      inbound_routing: string;
+    }
+  ];
+  special_notes: string;
+  deal_id: string;
 }
 
 @Injectable({
@@ -112,7 +297,7 @@ export class GlobalService {
   errorMessage: string = '';
   destinationDetailIntroImage: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   openBookingModal() {
     this.modalStatusObj.type = 'booking';
@@ -136,7 +321,9 @@ export class GlobalService {
 
   handelLogout(): Observable<AuthApiResponseType> {
     const logoutApiUrl = 'http://localhost:3000/api/auth/logout';
-    return this.http.get<AuthApiResponseType>(logoutApiUrl, { withCredentials: true });
+    return this.http.get<AuthApiResponseType>(logoutApiUrl, {
+      withCredentials: true,
+    });
   }
 
   handelUserAuthVerification(): Observable<AuthApiResponseType> {
@@ -172,17 +359,34 @@ export class GlobalService {
     } else {
       DestinationDetailUrl = `http://localhost:3000/api/destination/destination-detail?region=${region}`;
     }
-    return this.http.get<DestinationDetailResType>(DestinationDetailUrl, { withCredentials: true });
+    return this.http.get<DestinationDetailResType>(DestinationDetailUrl, {
+      withCredentials: true,
+    });
   }
 
   handelBooking(bookingData: any): Observable<any> {
     const BookingApiUrl = 'http://localhost:3000/api/destination/booking';
-    return this.http.post<any>(BookingApiUrl, bookingData, { withCredentials: true });
+    return this.http.post<any>(BookingApiUrl, bookingData, {
+      withCredentials: true,
+    });
   }
 
-  getDeals(query: string): Observable<Deals[]> {
-    let dealsApiUrl = `http://localhost:3000/api/deal/get-deals?type=${query}`;
+  getDeals(type: string, limit:number): Observable<Deals[]> {
+    const dealsApiUrl = `http://localhost:3000/api/deal/get-deals?type=${type}&limit=${limit}`;
     return this.http.get<Deals[]>(dealsApiUrl, { withCredentials: true });
   }
-}
 
+  getDealsDetail(code: string): Observable<DealDetailType> {
+    const dealDetailApiUrl = `http://localhost:3000/api/deal/deal-detail?code=${code}`;
+    return this.http.get<DealDetailType>(dealDetailApiUrl, {
+      withCredentials: true,
+    });
+  }
+
+  getVacationTypeDetail(vacationType: string): Observable<VacationTypeDetail> {
+    const vacationTypeDetailApiUrl = `http://localhost:3000/api/deal/vacation-type-detail?vacationType=${vacationType}`;
+    return this.http.get<VacationTypeDetail>(vacationTypeDetailApiUrl, {
+      withCredentials: true,
+    });
+  }
+}

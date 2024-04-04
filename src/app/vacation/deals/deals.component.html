@@ -1,6 +1,6 @@
 <div class="container text-center">
     <div class="row">
-        <h3>{{vacationType}} Deals</h3>
+        <h3>{{vacationType | uppercase}} DEALS</h3>
         <div class="col-md-6 col-lg-4 my-3" *ngFor="let deal of deals">
             <a [href]="'vacations/deals/' + deal.name + '/' + deal.code" class="link-underline link-underline-opacity-0">
                 <div class="card h-100 deal_card">

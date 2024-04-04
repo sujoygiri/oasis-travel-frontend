@@ -2,23 +2,28 @@
     <div class="deal_details_section">
         <div class="row my-3">
             <div class="col-lg-8 mt-3">
-                <div class="intro_image w-100">
-                    <img class="w-100 h-100"
-                        src="https://oms2.libertytravel.com/sites/default/files/styles/offer_image/public/Hyatt%20Zilara%20Cancun%20-%20new%20oms.jpg"
+                <div class="intro_image ">
+                    <img class="w-100"
+                        [src]="'https://oasis-image.blr1.cdn.digitaloceanspaces.com/'+dealDetails.image.file_path"
                         alt="">
                 </div>
             </div>
             <div class="col-lg-4 mt-3">
                 <div
                     class="intro_details h-100 px-3 py-2 d-flex flex-column justify-content-md-center border border-subtle-secondary text-center">
-                    <h4>Hyatt Zilara Cancun | Air & Vacation Package</h4>
-                    <p>Cancun, Mexico</p>
-                    <p>4 nights from $1365</p>
-                    <p>Offer ID:70886 • Exp: 3/31/2024</p>
-                    <p>The price above is for travel from October 7 - 11, 2024. Call 1-888-343-2128 to connect with a
+                    <h4>{{dealDetails.title}}</h4>
+                    <p><span>{{dealDetails.destinations[0].destination_name}}</span>,
+                        <span>{{dealDetails.destinations[0].parent}}</span></p>
+                    <p><span>{{dealDetails.trip_dates.los}}&nbsp;</span><span>{{dealDetails.trip_dates.los_units}}</span>
+                        from <span>{{dealDetails.price.total_price | currency : 'USD' : 'symbol-narrow' :
+                            '4.0-0'}}</span></p>
+                    <p>Offer ID:<span>{{dealDetails.deal_id}}</span> • Exp:
+                        <span>{{dealDetails.offer_publish.expire}}</span></p>
+                    <p>The price above is for travel from {{dealDetails.trip_dates.date_range}}. Call <a
+                            href="tel:1-888-343-2128">1-888-343-2128</a> to connect with a
                         travel expert.</p>
                     <div class="inquire_section pb-3">
-                        <button class="btn btn-danger w-75">Inquire</button>
+                        <button class="btn btn-danger w-75" (click)="handelBooking()">Inquire</button>
                     </div>
                 </div>
             </div>
@@ -37,80 +42,50 @@
                     </div>
                     <div class="special_notes border-bottom border-2 my-3">
                         <h4>Special Notes</h4>
-                        <div>
-                            <p><strong>SAVE</strong> up to 45% at Playa Hotels &amp; Resorts </p>
-                            <p><strong>ENJOY</strong> My Time extra amenities &amp; exclusive benefits during your stay
-                            </p>
-                            <p><strong>EXPERIENCE</strong> traditional Mexican warmth in an intimate setting on the
-                                Caribbean
-                                Sea</p>
-                            <p><strong>RELAX </strong>in Adult Only, All-inclusive Luxury in Cancun's Hotel Zone</p>
-                        </div>
+                        <div [innerHTML]="dealDetails.special_notes"></div>
                     </div>
                     <div class="departure_cities border-bottom border-2 my-3">
                         <div class="row">
                             <h4>Other Departure Cities</h4>
-                            <div class="col">
+                            <div class="col-12 col-md-6" *ngFor="let city of dealDetails.departure_cities">
                                 <div class="d-flex justify-content-between">
-                                    <p>New York City, NY</p>
-                                    <span>from $1365</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <p>Philadelphia, PA</p>
-                                    <span>from $1385</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <p>Chicago, IL</p>
-                                    <span>from $1389</span>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="d-flex justify-content-between">
-                                    <p>Boston, MA</p>
-                                    <span>from $1365</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <p>Miami, FL</p>
-                                    <span>from $1385</span>
+                                    <p>{{city.city_name}}</p>
+                                    <span>from {{city.total_price | currency : 'USD' : 'symbol-narrow' : '1.0-0'
+                                        }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="deal_info">
-                        <h4 class="deal_name">Hyatt Zilara Cancun</h4>
-                        <p class="deal_description my-3">An oceanfront resort exclusively for adults. Here, swim-up
-                            suites lead to an Infinity pool, a tequilasommelier teaches the art of sipping Mexico's
-                            traditional spirit, and a pool party creates an energetic vibe.With a vast selection of
-                            superb dining options and unparalleled accommodations, Hyatt Zilara Cancunoffers everything
-                            you would expect from an all-inclusive resort and so much more.</p>
-                        <h4>Amenities</h4>
+                        <h4 class="deal_name">{{dealDetails.hotels[0].name}}</h4>
+                        <p class="deal_description my-3">{{dealDetails.hotels[0].description}}</p>
+                        <h4 *ngIf="allAmenities.length">Amenities</h4>
                         <div class="all_amenities">
-                            <div class="amenities_panel">
+                            <div class="amenities_panel border-2 border-bottom border-success" *ngFor="let amenities of allAmenities">
                                 <p class="gap-1 w-100 mb-1">
-                                    <a class="w-100 d-inline-flex justify-content-between" data-bs-toggle="collapse"
-                                        href="/#collapseExample" role="button" aria-expanded="false"
-                                        aria-controls="collapseExample">
-                                        <div class="amenities_panel_text">Property Features</div>
-                                        <i class="bi bi-chevron-down" style="cursor: pointer;"></i>
-                                        <i class="bi bi-chevron-up" style="cursor: pointer;"></i>
+                                    <a class="w-100 py-2 d-inline-flex justify-content-between link-underline link-underline-opacity-0 text-danger"
+                                        data-bs-toggle="collapse" fragment="" attr.data-bs-target="#{{amenities.id}}" role="button"
+                                        aria-expanded="false" attr.aria-controls="{{amenities.id}}" (click)="showCorrectSymbol(amenities.id)">
+                                        <div class="amenities_panel_text">{{amenities.name}}</div>
+                                        <i class="bi" ngClass="{{currentAmenitiesId === amenities.id ? currentClassName : 'bi-chevron-down'}}" style="cursor: pointer;" ></i>
                                     </a>
                                 </p>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        Some placeholder content for the collapse component. This panel is hidden by
-                                        default
-                                        but revealed when the user activates the relevant trigger.
+                                <div class="collapse" [id]="amenities.id">
+                                    <div class="row">
+                                        <div class="col-6" *ngFor="let value of amenities.value">
+                                            <p>{{value}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="check_in_info border-top border-bottom border-2 my-3">
+                    <div class="check_in_info my-3">
                         <h4 class="my-1">Information</h4>
                         <ul class="ps-0" style="list-style: none;">
-                            <li>Check in: 3:00 PM</li>
-                            <li>Check out: 12:00 PM</li>
-                            <li>307 rooms</li>
+                            <li>Check in: {{checkInTime}}</li>
+                            <li>Check out: {{checkOutTime}}</li>
+                            <li><span>{{dealDetails.hotels[0].rooms}}</span> rooms</li>
                         </ul>
                     </div>
                 </div>

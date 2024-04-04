@@ -6,5 +6,6 @@ import { VacationTypeDetailsComponent } from "./vacation-type-details/vacation-t
 export const VACATION_ROUTES:Routes = [
     {path:"",component:VacationComponent},
     {path:"deals/:dealName/:code",component:DealDetailsComponent},
-    {path:":vacationType",component:VacationTypeDetailsComponent}
+    {path:":vacationType",component:VacationTypeDetailsComponent},
+    {path: "**", redirectTo: ""}
 ]
